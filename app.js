@@ -2,7 +2,7 @@
 
 let min = 1,
     max = 10,
-    winNum = 3,
+    winNum = getRandomNum(min, max),
     countOfTry = 3;
 
 
@@ -28,8 +28,14 @@ eventInit();
 function eventInit() {
     //events 
     UIsubmit.addEventListener('click', sub);
+    UIgame.addEventListener('mousedown', newGame);
 };
 
+function newGame(e) {
+    if (e.target.className === 'play-again') {
+        window.location.reload();
+    }
+}
 
 
 function sub(e) {
@@ -74,6 +80,11 @@ function doGame(action, msg) {
     color = action === true ? 'green' : 'red';
     UIinput.style.borderColor = color;
     UIinput.disabled = true;
-    UIsubmit.disabled = true;
+    UIsubmit.value = 'play again';
+    UIsubmit.className += 'play-again';
     setMessage(msg, color);
+}
+
+function getRandomNum(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + 1)
 }
