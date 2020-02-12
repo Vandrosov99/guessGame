@@ -25,11 +25,6 @@ UImax.textContent = max;
 eventInit();
 
 
-
-
-
-
-
 function eventInit() {
     //events 
     UIsubmit.addEventListener('click', sub);
@@ -37,32 +32,48 @@ function eventInit() {
 
 
 
-function sub() {
+function sub(e) {
     let guess = parseInt(UIinput.value);
     console.log(guess);
 
     if (isNaN(guess) || guess < min || guess > max) {
-        setTimeout(removeErr, 3000);
-        setMessage(`Enter your number between ${min} and $ ${max}`, 'red');
+        if (isNaN(guess)) {
+            countOfTry = countOfTry + 1;
+        }
+        setMessage(`Enter your number between ${min} and ${max}`, 'red');
     }
 
     if (guess === winNum) {
-        UIinput.disabled = true;
-        UIinput.style.borderColor = 'green';
-        setMessage(`YOU WON! ${guess} is correct!`, 'green')
+        doGame(true, `YOU WON! ${guess} is correct!`)
+        //  setMessage(`YOU WON! ${guess} is correct!`, 'green')
     } else {
-
+        countOfTry = countOfTry - 1;
+        if (countOfTry === 0) {
+            doGame(false, `YOU LOSE, answer was  ${winNum}`);
+        } else {
+            //  UIinput.style.borderColor = 'red';
+            UIinput.value = '';
+            setMessage(`${guess} is not true, tries left ${countOfTry} `, 'orange');
+        }
     }
 }
-
 
 function setMessage(msg, color) {
     UImsg.textContent = msg;
     UImsg.style.color = color;
-    //setTimeout(removeErr, 3000);
+    setTimeout(removeErr, 10000);
 
 }
 
 function removeErr() {
-    UImsg.remove();
+    UImsg.textContent = '';
+}
+
+function doGame(action, msg) {
+    let color;
+    color = action === true ? 'green' : 'red';
+    UIinput.style.borderColor = color;
+    UIinput.disabled = true;
+    UIsubmit.disabled = true;
+    setMessage(msg, color);
 }
