@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.body {
+    background-color: #ffffff;
+    color: #333333;
+
+}
+
+.container {
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+    overflow: hidden
+}
+
+h1 {
+    font-size: 50px;
+    text-align: center;
+}
+
+.game {
+    text-align: center;
+}
+
+p {
+    margin: 20px;
+}
+
+input {
+
+    display: inline-block;
+    height: 25px;
+    /* background-color: #f6f6f6; */
+    border: 1px solid #848482;
+    border-radius: 2px;
+    padding: 2px 5px
+}
